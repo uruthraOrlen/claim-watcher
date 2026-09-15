@@ -21,8 +21,8 @@ func main() {
 
 	// Load .env if present.
 	// Existing OS environment variables are NOT overwritten.
-	if err := godotenv.Load(); err != nil {
-		log.Printf("No .env file loaded: %v", err)
+	if err := godotenv.Load(); err != nil && !os.IsNotExist(err) {
+		log.Printf("Error loading .env file: %v", err)
 	}
 
 	cfg, err := config.Load()
